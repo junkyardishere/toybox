@@ -1,0 +1,11 @@
+body {
+    color: white;
+    font-size: xx-large;
+    text-shadow: 0 0 5px pink;
+    font-family: 'Casteller';
+}
+.contents {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+}
