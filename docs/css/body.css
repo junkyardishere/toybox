@@ -1,7 +1,7 @@
 body {
     color: white;
     font-size: xx-large;
-    text-shadow: 0 0 5px pink;
+    text-shadow: 1px 1px 10px rgb(245, 129, 148), -1px 1px 10px rgb(245, 129, 148), 1px -1px 10px rgb(245, 129, 148), -1px -1px 10px rgb(245, 129, 148);
     font-family: 'Casteller';
 }
 .contents {
