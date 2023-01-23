@@ -1,7 +1,7 @@
 const canvas = document.getElementById('mochisamune');
 const ctx = canvas.getContext('2d');
 const image = new Image();
-const MAX_SCALE = 3;
+const MAX_SCALE = 4;
 const SCALE_STEP = 0.2;
 let imageScale = 1, imageScaleIndex = 0;
 
@@ -53,6 +53,8 @@ function canvasZoom() {
             zoomTop = 0;
             rate = 1;
             imageScaleIndex = 0;
+            setCountStop();
+            setTimeout('setCountStart()', 500);
         } else {
             zoomWidth = canvas.width / imageScale;
             zoomHeight = canvas.height / imageScale;
@@ -77,4 +79,4 @@ function setCountStart() {
 }
 
 draw();
-setInterval('canvasZoom()',30);
+setInterval('canvasZoom()',2);
