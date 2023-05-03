@@ -101,14 +101,17 @@ func main() {
 		templates: template.Must(template.ParseGlob("view/*.html")),
 	}
 	e.Renderer = renderer
-	e.Static("/view/answerer", "./view/answerer.html")
-	e.Static("/view/questioner", "./view/questioner.html")
+	// e.Static("/view/answerer", "./view/answerer.html")
+	// e.Static("/view/questioner", "./view/questioner.html")
 	// e.Static("/view/spectator", "./view/spectator.html")
 	e.Static("/view/js/", "./view/js/")
 	e.Static("/view/css/", "./view/css/")
-	// e.GET("/view/answerer", func(c echo.Context) error {
-	// 	return c.Render(http.StatusOK, "answerer", "")
-	// })
+	e.GET("/view/answerer", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "answerer.html", "")
+	})
+	e.GET("/view/questioner", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "questioner.html", "")
+	})
 	e.GET("/view/spectator", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "spectator.html", "")
 	})
