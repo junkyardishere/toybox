@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 
 	"github.com/go-playground/validator"
 	"github.com/gorilla/websocket"
@@ -72,6 +74,14 @@ type DefaultResponse struct {
 	Result string `json:"result"`
 }
 
+type TemplateRender struct {
+	templates *template.Template
+}
+
+func (t *TemplateRender) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
+}
+
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
@@ -87,11 +97,21 @@ func main() {
 	}
 
 	// html
+	renderer := &TemplateRender{
+		templates: template.Must(template.ParseGlob("view/*.html")),
+	}
+	e.Renderer = renderer
 	e.Static("/view/answerer", "./view/answerer.html")
 	e.Static("/view/questioner", "./view/questioner.html")
 	e.Static("/view/spectator", "./view/spectator.html")
 	e.Static("/view/js/", "./view/js/")
 	e.Static("/view/css/", "./view/css/")
+	// e.GET("/view/answerer", func(c echo.Context) error {
+	// 	return c.Render(http.StatusOK, "answerer", "")
+	// })
+	e.GET("/view/spectator", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "spectator.html", "")
+	})
 	e.GET("/", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, DefaultResponse{Result: "ok"})
 	})
