@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/go-playground/validator"
 	"github.com/gorilla/websocket"
@@ -80,6 +81,10 @@ func main() {
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5656"
+	}
 
 	// html
 	e.Static("/view/answerer", "./view/answerer.html")
@@ -105,7 +110,7 @@ func main() {
 	e.GET("/ws", subscribe)
 	e.GET("/ws/spectate", subscribeForSpectator)
 	go handleMessages()
-	e.Logger.Fatal(e.Start(":5656"))
+	e.Logger.Fatal(e.Start(port))
 }
 
 func empty(c echo.Context) (err error) {

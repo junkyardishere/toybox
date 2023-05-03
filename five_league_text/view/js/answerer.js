@@ -6,7 +6,7 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-const port = ":5656"
+const port = ""
 const websocketEndpoint = "/ws"
 const wsParameter = "?session="+roomKey+"&player="+playerName+"&id="+myPlayerId;
 const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint+wsParameter);
