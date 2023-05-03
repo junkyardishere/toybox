@@ -103,7 +103,7 @@ func main() {
 	e.Renderer = renderer
 	e.Static("/view/answerer", "./view/answerer.html")
 	e.Static("/view/questioner", "./view/questioner.html")
-	e.Static("/view/spectator", "./view/spectator.html")
+	// e.Static("/view/spectator", "./view/spectator.html")
 	e.Static("/view/js/", "./view/js/")
 	e.Static("/view/css/", "./view/css/")
 	// e.GET("/view/answerer", func(c echo.Context) error {
