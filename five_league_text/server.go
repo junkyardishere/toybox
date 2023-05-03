@@ -92,6 +92,9 @@ func main() {
 	e.Static("/view/spectator", "./view/spectator.html")
 	e.Static("/view/js/", "./view/js/")
 	e.Static("/view/css/", "./view/css/")
+	e.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, DefaultResponse{Result: "ok"})
+	})
 
 	// sender
 	// // answerer
