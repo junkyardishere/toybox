@@ -6,10 +6,10 @@ const uri = new URL(window.location.href);
 const port = ""
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
-const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
 
 // rest
-const restApiUrl = "http://" + uri.hostname+ port;
+const restApiUrl = "https://" + uri.hostname+ port;
 const restApiEndpoint = "/game/questioner";
 const restApiUrlQuestioner = restApiUrl + restApiEndpoint;
 

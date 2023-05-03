@@ -6,7 +6,7 @@ const uri = new URL(window.location.href);
 const port = ""
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
-const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
 
 // global variables
 // game data
