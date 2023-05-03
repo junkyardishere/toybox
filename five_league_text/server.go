@@ -110,7 +110,7 @@ func main() {
 	e.GET("/ws", subscribe)
 	e.GET("/ws/spectate", subscribeForSpectator)
 	go handleMessages()
-	e.Logger.Fatal(e.Start(port))
+	e.Logger.Fatal(e.Start(":" + port))
 }
 
 func empty(c echo.Context) (err error) {
