@@ -108,7 +108,7 @@ function renderAnswers(answers) {
     console.log(players);
     const other_answer_text = document.getElementsByClassName('other_answer_text');
     for (let index = 0; index < maxPlayer; index++) {
-        other_answer_text[index].innerText = "";
+        other_answer_text[index].innerText = "-";
     }
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < answers.length; i++) {
@@ -128,7 +128,7 @@ function renderAnswers(answers) {
 function initAnswers() {
     const other_answer_text = document.getElementsByClassName('other_answer_text');
     for (let index = 0; index < maxPlayer; index++) {
-        other_answer_text[index].innerText = "";
+        other_answer_text[index].innerText = "　";
         other_answer_text[index].style.backgroundColor  = '#0000ff';
     }
     for (let index = 0; index < maxPlayer; index++) {
