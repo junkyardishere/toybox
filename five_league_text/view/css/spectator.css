@@ -1,6 +1,6 @@
 body{
 	margin:0;
-    margin-top: 20px;
+    margin-top: 80px;
 	padding:0;
 }
 
@@ -48,6 +48,7 @@ body{
 }
 
 .other_answer_name {
+    margin: 0px;
     border: solid 1px #000;
     height: 42px;
     text-align: center;
