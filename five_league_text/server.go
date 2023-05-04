@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"text/template"
+	"time"
 
 	"github.com/go-playground/validator"
 	"github.com/gorilla/websocket"
@@ -15,11 +16,12 @@ import (
 )
 
 var (
-	upgrader      = websocket.Upgrader{}
-	clients       = make(map[*websocket.Conn]bool)
-	broadcast     = make(chan Message)
-	session       *Session
-	joinedSession *JoindSession
+	upgrader         = websocket.Upgrader{}
+	clients          = make(map[*websocket.Conn]bool)
+	broadcast        = make(chan Message)
+	session          *Session
+	joinedSession    *JoindSession
+	keepAliveStarted = false
 )
 
 type Message struct {
@@ -101,9 +103,6 @@ func main() {
 		templates: template.Must(template.ParseGlob("view/*.html")),
 	}
 	e.Renderer = renderer
-	// e.Static("/view/answerer", "./view/answerer.html")
-	// e.Static("/view/questioner", "./view/questioner.html")
-	// e.Static("/view/spectator", "./view/spectator.html")
 	e.Static("/view/js/", "./view/js/")
 	e.Static("/view/css/", "./view/css/")
 	e.GET("/view/answerer", func(c echo.Context) error {
@@ -136,6 +135,7 @@ func main() {
 	e.GET("/ws", subscribe)
 	e.GET("/ws/spectate", subscribeForSpectator)
 	go handleMessages()
+	go keepAlive()
 	e.Logger.Fatal(e.Start(":" + port))
 }
 
@@ -338,6 +338,13 @@ func handleMessages() {
 	}
 }
 
+func keepAlive() {
+	for {
+		time.Sleep(time.Second * 10)
+		broadcastMessageToEveryone("keepAlive", DefaultResponse{Result: "ok"})
+	}
+}
+
 func (cv *CustomValidator) Validate(i interface{}) error {
 	if err := cv.validator.Struct(i); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, DefaultResponse{Result: err.Error()})
@@ -357,6 +364,15 @@ func broadcastMessageToPlayers(messageType string, body interface{}) {
 func broadcastMessageToQuestioner(messageType string, body interface{}) {
 	m := Message{
 		Destination: "questioner",
+		Type:        messageType,
+		Body:        body,
+	}
+	broadcast <- m
+}
+
+func broadcastMessageToEveryone(messageType string, body interface{}) {
+	m := Message{
+		Destination: "everyone",
 		Type:        messageType,
 		Body:        body,
 	}

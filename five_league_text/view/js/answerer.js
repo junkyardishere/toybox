@@ -38,6 +38,10 @@ socket.addEventListener("open", (event) => {
     console.log('WS: opened.');
 })
 
+socket.addEventListener("close", (event) => {
+    alert("接続が切れました。画面を更新してください。");
+})
+
 socket.addEventListener("message", (event) => {
     console.log('WS: message received.');
     const data = event.data;
