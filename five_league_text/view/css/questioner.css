@@ -39,6 +39,14 @@ body{
     border: solid 1px #000;
 }
 
+.debug_correct_text {
+    color: white;
+}
+
+#debug_question_correct_text {
+    width: 300px;
+}
+
 .other_answer_text {
     margin:0;
     margin-top: 10px;
