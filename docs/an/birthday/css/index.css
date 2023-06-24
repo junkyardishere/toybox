@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'kaiso_up_web';
+    src: url('../font/Kaisotai-Next-UP-B.woff2') format('woff2');
+}
+  
 body {
     background-color: black;
 }
@@ -11,7 +16,9 @@ body {
 #count_down_birthday {
     display: flex;
     justify-content: center;
-    color: white;
+    color: #7FC0BA;
+    font-size:40pt;
+    font-family:kaiso_up_web, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
 #birthday_message {
