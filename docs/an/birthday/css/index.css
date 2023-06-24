@@ -16,7 +16,11 @@ body {
 #count_down_birthday {
     display: flex;
     justify-content: center;
-    color: #7FC0BA;
+    color: #52a8a0;
+    text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+               -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+                0px 1px 0 #FFF,  0-1px 0 #FFF,
+               -1px 0 0 #FFF, 1px 0 0 #FFF;
     font-size:40pt;
     font-family:kaiso_up_web, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
