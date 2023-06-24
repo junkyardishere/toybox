@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#count_down_birthday {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+#birthday_message {
+    background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000) 0 / 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 300%;
+    font-weight: bold;
+    display: none;
+    height: 150px;
+    animation: 0.3s birthday_message_anim linear infinite;
+    text-align: center
+}
+
+#netsurugi_dono {
+    color: white;
+    font-size:8pt;
+    line-height:11px;
+}
+
+#netsurugi_dono_rainbow {
+    background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000) 0 / 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size:8pt;
+    line-height:11px;
+    display: inline-block;
+    height: 600px;
+    animation: 0.3s birthday_message_anim linear infinite;
+    text-align: center
+}
+
+@keyframes birthday_message_anim{
+    100% { background-position: 200%; }
+}
+
