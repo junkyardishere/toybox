@@ -34,7 +34,8 @@ body {
     display: none;
     height: 150px;
     animation: 0.3s birthday_message_anim linear infinite;
-    text-align: center
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #netsurugi_dono {
