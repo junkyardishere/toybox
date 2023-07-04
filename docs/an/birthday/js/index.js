@@ -8,6 +8,10 @@ if (dbg === "1") {
 var headWrap = document.getElementById("count_down_birthday");
 var headWrapMsg = document.getElementById("count_down_message");
 var headWrapTmr = document.getElementById("count_down_timer");
+var headBDayDay = document.getElementById("cd_bday_day");
+var headBDayHour = document.getElementById("cd_bday_hour");
+var headBDayMin = document.getElementById("cd_bday_min");
+var headBDaySec = document.getElementById("cd_bday_sec");
 
 var bDayMsg = document.getElementById("birthday_message");
 var bDayNets = document.getElementById("netsurugi_dono_rainbow");
@@ -20,17 +24,17 @@ var bDayAA = document.getElementById("netsurugi_dono_rainbow_aa");
     let bDayStart = Date.parse( year+"-"+bMonth.toString().padStart(2, '0')+"-"+bDay.toString().padStart(2, '0')+"T00:00:00+0900" );
     let bDayEnd = Date.parse( year+"-"+bMonth.toString().padStart(2, '0')+"-"+bDay.toString().padStart(2, '0')+"T23:59:59+0900" );
 
-    let msg ="誕生日まで残り: ";
+    let bDayResult ={};
     let remain = 0;
     if (bDayStart > now.getTime()) {
         console.log("誕生日前");
-        msg = getNextBdayCount(bDayStart, now);
-        console.log(msg);
+        bDayResult = getNextBdayCount(bDayStart, now);
+        console.log(bDayResult);
     } else if (now.getTime() > bDayEnd) {
         console.log("誕生日後");
         let nextBday = Date.parse( (year + 1)+"-"+bMonth.toString().padStart(2, '0')+"-"+bDay.toString().padStart(2, '0')+"T00:00:00+0900" );
-        msg = getNextBdayCount(nextBday, now);
-        console.log(msg);
+        bDayResult = getNextBdayCount(nextBday, now);
+        console.log(bDayResult);
     } else {
         console.log("誕生日！");
         isBirthday = true;
@@ -40,7 +44,10 @@ var bDayAA = document.getElementById("netsurugi_dono_rainbow_aa");
     console.log(now.getTime());
     console.log(bDayStart);
     console.log(bDayEnd);
-    document.getElementById(element_id).innerHTML = msg;
+    headBDayDay.innerHTML = bDayResult.day;
+    headBDayHour.innerHTML = bDayResult.hour;
+    headBDayMin.innerHTML = bDayResult.min;
+    headBDaySec.innerHTML = bDayResult.sec;
     isBirthday = false;
 }
 setInterval('countToBirthday(7, 7, "count_down_timer")',49);
@@ -52,8 +59,14 @@ function getNextBdayCount(nextBday, now) {
     let hour = Math.floor(remain / 1000 / 60 / 60) % 24;
     let min  = Math.floor(remain / 1000 / 60) % 60;
     let sec  = Math.floor(remain / 1000) % 60;
-    msg = day + "日" + hour + "時間" + min + "分" + sec + "秒";
-    return msg;
+    // msg = day + "日" + hour + "時間" + min + "分" + sec + "秒";
+    result = {
+        "day": day,
+        "hour": hour,
+        "min": min,
+        "sec": sec,
+    }
+    return result;
 }
 
 function checkBirthday() {
@@ -61,6 +74,10 @@ function checkBirthday() {
         headWrap.style.display = "none";
         headWrapMsg.style.display = "none";
         headWrapTmr.style.display = "none";
+        headBDayDay.style.display = "none";
+        headBDayHour.style.display = "none";
+        headBDayMin.style.display = "none";
+        headBDaySec.style.display = "none";
 
         bDayMsg.style.display = "block";
         bDayNets.style.display = "block";
@@ -69,6 +86,10 @@ function checkBirthday() {
         headWrap.style.display = "flex";
         headWrapMsg.style.display = "flex";
         headWrapTmr.style.display = "flex";
+        headBDayDay.style.display = "block";
+        headBDayHour.style.display = "block";
+        headBDayMin.style.display = "block";
+        headBDaySec.style.display = "block";
 
         bDayMsg.style.display = "none";
         bDayNets.style.display = "none";
