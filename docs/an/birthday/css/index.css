@@ -54,12 +54,15 @@ span.bNumber{
     background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000) 0 / 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size:8pt;
-    line-height:11px;
+    font-size:10px;
+    line-height: 10px;
     display: inline-block;
-    height: 600px;
+    vertical-align: text-top;
+    height: 1000px;
     animation: 0.3s birthday_message_anim linear infinite;
-    text-align: center
+    text-align: center;
+    transform: scale(0.9);
+    margin:calc(270px / 4 * -1);
 }
 
 @keyframes birthday_message_anim{
