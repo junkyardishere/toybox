@@ -3,13 +3,15 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-const port = "";
+// const port = "";
+const port = ":5656";
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
-const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
-
+// const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
 // rest
-const restApiUrl = "https://" + uri.hostname+ port;
+// const restApiUrl = "https://" + uri.hostname+ port;
+const restApiUrl = "http://" + uri.hostname+ port;
 const restApiEndpoint = "/game/questioner";
 const restApiUrlQuestioner = restApiUrl + restApiEndpoint;
 
@@ -65,7 +67,7 @@ socket.addEventListener("message", (event) => {
                 renderPlayersArea(body);
                 break;
             case "question":
-                renderQuestion(body.question);
+                // renderQuestion(body.question);
                 initAnswers();
                 break;
             case "judge":
@@ -186,19 +188,22 @@ function sendSpectator() {
 
 function renderAnswers(answers) {
     console.log(players);
+    const other_answer_text = document.getElementsByClassName('other_answer_text');
     const other_answer_name = document.getElementsByClassName('other_answer_name');
     for (let index = 0; index < maxPlayer; index++) {
-        other_answer_name[index].innerText = "";
+        other_answer_text[index].innerText = "";
     }
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < answers.length; i++) {
             if (undefined !== players[index]) {
-                if (other_answer_name[players[index].position-1].id === answers[i].id) {
-                    other_answer_name[players[index].position-1].innerText = answers[i].answer;
+                if (other_answer_text[players[index].position-1].id === answers[i].id) {
+                    other_answer_text[players[index].position-1].innerText = answers[i].answer;
                     if (answers[i].result === true) {
                         other_answer_name[players[index].position-1].style.backgroundColor  = '#ff0000';
+                        other_answer_name[players[index].position-1].style.color  = '#ffffff';
                     } else {
-                        other_answer_name[players[index].position-1].style.backgroundColor  = '#ffffff';   
+                        other_answer_name[players[index].position-1].style.backgroundColor  = '#ffffff';
+                        other_answer_name[players[index].position-1].style.color  = '#000000';
                     }
                     break;
                 }    
