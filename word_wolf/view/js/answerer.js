@@ -149,19 +149,19 @@ function initQuestion(question) {
 
 function renderAnswers(answers) {
     console.log(players);
-    const other_answer_text = document.getElementsByClassName('other_answer_text');
+    const other_answer_name = document.getElementsByClassName('other_answer_name');
     for (let index = 0; index < maxPlayer; index++) {
-        other_answer_text[index].innerText = "";
+        other_answer_name[index].innerText = "";
     }
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < answers.length; i++) {
             if (undefined !== players[index]) {
-                if (other_answer_text[players[index].position-1].id === answers[i].id) {
-                    other_answer_text[players[index].position-1].innerText = answers[i].answer;
+                if (other_answer_name[players[index].position-1].id === answers[i].id) {
+                    other_answer_name[players[index].position-1].innerText = answers[i].answer;
                     if (answers[i].result === true) {
-                        other_answer_text[players[index].position-1].style.backgroundColor  = '#ff0000';
+                        other_answer_name[players[index].position-1].style.backgroundColor  = '#ff0000';
                     } else {
-                        other_answer_text[players[index].position-1].style.backgroundColor  = '#0000ff';
+                        other_answer_name[players[index].position-1].style.backgroundColor  = '#ffffff';
                     }
                     break;
                 }    

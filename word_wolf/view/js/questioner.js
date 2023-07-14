@@ -186,17 +186,19 @@ function sendSpectator() {
 
 function renderAnswers(answers) {
     console.log(players);
-    const other_answer_text = document.getElementsByClassName('other_answer_text');
+    const other_answer_name = document.getElementsByClassName('other_answer_name');
     for (let index = 0; index < maxPlayer; index++) {
-        other_answer_text[index].innerText = "";
+        other_answer_name[index].innerText = "";
     }
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < answers.length; i++) {
             if (undefined !== players[index]) {
-                if (other_answer_text[players[index].position-1].id === answers[i].id) {
-                    other_answer_text[players[index].position-1].innerText = answers[i].answer;
+                if (other_answer_name[players[index].position-1].id === answers[i].id) {
+                    other_answer_name[players[index].position-1].innerText = answers[i].answer;
                     if (answers[i].result === true) {
-                        other_answer_text[players[index].position-1].style.backgroundColor  = '#ff0000';
+                        other_answer_name[players[index].position-1].style.backgroundColor  = '#ff0000';
+                    } else {
+                        other_answer_name[players[index].position-1].style.backgroundColor  = '#ffffff';   
                     }
                     break;
                 }    
@@ -254,7 +256,7 @@ function renderPlayersAnswer(answer) {
 }
 
 function changeAnswerResult(classId) {
-    const other_answer_text = document.getElementsByClassName('other_answer_text');
+    // const other_answer_text = document.getElementsByClassName('other_answer_text');
     const other_answer_name = document.getElementsByClassName('other_answer_name');
     const playerName = other_answer_name[classId].innerText;
     const index = playerAnswers.findIndex(e => e.name == playerName);
@@ -265,12 +267,12 @@ function changeAnswerResult(classId) {
     const player = playerAnswers[index];
     if (player.result === false) {
         playerAnswers[index].result = true;
-        other_answer_text[classId].style.backgroundColor = '#ff0000';
-        other_answer_text.innerText = role_wolf_text;
+        other_answer_name[classId].style.backgroundColor = '#ff0000';
+        other_answer_name.innerText = role_wolf_text;
     } else {
         playerAnswers[index].result = false;
-        other_answer_text[classId].style.backgroundColor = '#0000ff';
-        other_answer_text.innerText = role_innocent_text;
+        other_answer_name[classId].style.backgroundColor = '#ffffff';
+        other_answer_name.innerText = role_innocent_text;
     }
 
     console.log(playerAnswers);
