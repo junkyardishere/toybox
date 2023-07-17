@@ -214,9 +214,12 @@ function renderAnswers(answers) {
 
 function initAnswers() {
     const other_answer_text = document.getElementsByClassName('other_answer_text');
+    const other_answer_name = document.getElementsByClassName('other_answer_name');
     for (let index = 0; index < maxPlayer; index++) {
         other_answer_text[index].innerText = role_default_text;
         other_answer_text[index].style.backgroundColor  = '#0000ff';
+        other_answer_name[index].style.backgroundColor  = '#ffffff';
+        other_answer_name[index].style.color  = '#000000';
     }
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < players.length; i++) {
