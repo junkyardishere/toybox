@@ -178,9 +178,12 @@ function renderAnswers(answers) {
 
 function initAnswers() {
     const other_answer_text = document.getElementsByClassName('other_answer_text');
+    const other_answer_name = document.getElementsByClassName('other_answer_name');
     for (let index = 0; index < maxPlayer; index++) {
         other_answer_text[index].innerText = "";
         other_answer_text[index].style.backgroundColor  = '#0000ff';
+        other_answer_name[index].style.backgroundColor  = '#ff0000';
+        other_answer_name[index].style.color  = '#ffffff';
     }
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < players.length; i++) {
