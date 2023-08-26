@@ -1,4 +1,4 @@
-module junkyardishere/toybox/five_league_text
+module junkyardishere/toybox/five_league
 
 go 1.20
 
