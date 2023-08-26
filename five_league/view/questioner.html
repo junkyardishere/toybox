@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/questioner.css">
+    <title>Five League!!!(Questioner)</title>
+</head>
+<body>
+    <div id="contents">
+        <div id="question_area">
+            <textarea id="question" rows="10" cols="50"></textarea>
+            <button id="send_question" onclick="sendQuestion();">問題送信</button>
+            <br>
+            <div id="debug_question_area">
+                <p class="debug_correct_text">正解↓</p>
+                <p><input type="text" id="debug_question_correct_text"></p>
+            </div>
+        </div>
+        <div id="other_answer_area">
+            <div id="other_answers">
+                <div class="other_answer">
+                    <canvas class="other_answer_text" onclick="changeAnswerResult('0');"></canvas>
+                    <p class="other_answer_name">-</p>
+                </div>
+                <div class="other_answer">
+                    <canvas class="other_answer_text" onclick="changeAnswerResult('1');"></canvas>
+                    <p class="other_answer_name">-</p>
+                </div>
+                <div class="other_answer">
+                    <canvas class="other_answer_text" onclick="changeAnswerResult('2');"></canvas>
+                    <p class="other_answer_name">-</p>
+                </div>
+                <div class="other_answer">
+                    <canvas class="other_answer_text" onclick="changeAnswerResult('3');"></canvas>
+                    <p class="other_answer_name">-</p>
+                </div>
+                <div class="other_answer">
+                    <canvas class="other_answer_text" onclick="changeAnswerResult('4');"></canvas>
+                    <p class="other_answer_name">-</p>
+                </div>
+            </div>
+            <button id="send_judge" onclick="sendJudge();">正解判定送信</button>
+        </div>
+    </div>
+    <script src="./js/questioner.js"></script>
+</body>
+</html>
