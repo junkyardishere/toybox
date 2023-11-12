@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'Ronde-B';
+    src: url('../font/Ronde-B_square.otf') format('woff2');
+}
+
+body {
+    background-color: black;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#count_down_birthday {
+    display: flex;
+    justify-content: center;
+    color: #b60c06;
+    text-shadow:1px 1px 0 #b9aa1cc9, -1px -1px 0 #FFF,
+               -1px 1px 0 #FFF, 1px -1px 0 #b9aa1cc9,
+                0px 1px 0 #FFF,  0-1px 0 #FFF,
+               -1px 0 0 #FFF, 1px 0 0 #FFF;
+    font-size:40pt;
+    font-family:Ronde-B, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+span.bNumber{
+    width: 40px;
+    height: 50px;
+    text-align: right;
+}
+
+#birthday_message {
+    background: linear-gradient(to Right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000) 0 / 1000%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 300%;
+    font-weight: bold;
+    display: none;
+    height: 150px;
+    animation: 0.3s birthday_message_anim linear infinite;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#netsurugi_dono {
+    color: white;
+    font-size:8pt;
+    line-height:11px;
+}
+
+#netsurugi_dono_rainbow {
+    background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000) 0 / 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size:10px;
+    line-height: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    height: 1000px;
+    animation: 0.3s birthday_message_anim linear infinite;
+    text-align: center;
+    transform: scale(0.9);
+    margin:calc(270px / 4 * -1);
+}
+
+@keyframes birthday_message_anim{
+    100% { background-position: 200%; }
+}
+
+#eringi{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    background: linear-gradient(to right,#e60000,#f39800,#fff100,#009944,#0068b7,#1d2088,#920783,#e60000) 0 / 200%;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    animation: 0.3s birthday_message_anim linear infinite;
+    text-align: center;
+    transform: scale(0.9);
+}
