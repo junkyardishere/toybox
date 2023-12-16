@@ -60,6 +60,13 @@ socket.addEventListener("message", (event) => {
             case "players":
                 renderPlayersArea(body);
                 break;
+            case "editSession":
+                maxPlayer = body.maxPlayers;
+                initPlayers(body.players);
+                initAnswers();
+                initQuestion(question);
+                initAnswers();
+                break;
             case "question":
                 renderQuestion(body.question);
                 initAnswers();
@@ -137,6 +144,18 @@ function renderPlayersArea(p) {
 }
 
 function initPlayers(players) {
+    const other_answers = document.getElementById('other_answers');
+    const initialChild = other_answers.children[0].cloneNode(true);
+
+    while(other_answers.firstChild){
+        other_answers.removeChild(other_answers.firstChild);
+    }
+    for (let index = 0; index < maxPlayer; index++) {
+        const clonedElement = initialChild.cloneNode(true);
+        const canvasElement = clonedElement.querySelector('.other_answer_text');
+        canvasElement.setAttribute('onclick', `changeAnswerResult('${index}')`);
+        other_answers.appendChild(clonedElement);
+    }
     renderPlayersArea(players);
 }
 

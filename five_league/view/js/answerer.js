@@ -65,6 +65,23 @@ socket.addEventListener("message", (event) => {
             case "players":
                 renderPlayersArea(body);
                 break;
+            case "editSession":
+                console.log(body);
+                for (const player of body.players) {
+                    if (player.id === myPlayerId) {
+                        playerPosition = player.position;
+                        initMyData(playerName, player.position);
+                        break;
+                    }
+                }
+                maxPlayer = body.maxPlayers;
+                initPlayers(body.players);
+                initAnswers();
+                initQuestion(question);
+                disableAnswerButton();
+                initAnswers();
+                initMyAnswerText();
+                break;
             case "question":
                 renderQuestion(body.question);
                 initAnswers();
@@ -130,6 +147,14 @@ function renderPlayersArea(p) {
 }
 
 function initPlayers(players) {
+    const other_answers = document.getElementById('other_answers');
+    const initialChild = other_answers.children[0];
+    while( other_answers.firstChild ){
+        other_answers.removeChild( other_answers.firstChild );
+    }
+    for (let index = 0; index < maxPlayer; index++) {
+        other_answers.appendChild(initialChild.cloneNode(true));
+    }
     renderPlayersArea(players);
 }
 

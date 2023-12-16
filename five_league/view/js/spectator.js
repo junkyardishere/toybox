@@ -3,8 +3,8 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-// const port = ":5656"
-const port = ""
+const port = ":5656"
+// const port = ""
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
 // const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
@@ -53,6 +53,12 @@ socket.addEventListener("message", (event) => {
             case "players":
                 renderPlayersArea(body);
                 break;
+            case "editSession":
+                maxPlayer = body.maxPlayers;
+                initPlayers(body.players);
+                initAnswers();
+                initQuestion(question);
+                break;
             case "question":
                 renderQuestion(body.question);
                 initAnswers();
@@ -97,6 +103,15 @@ function renderPlayersArea(p) {
 }
 
 function initPlayers(players) {
+    const other_answers = document.getElementById('other_answers');
+    const initialChild = other_answers.children[0];
+    console.log(initialChild);
+    while( other_answers.firstChild ){
+        other_answers.removeChild( other_answers.firstChild );
+    }
+    for (let index = 0; index < maxPlayer; index++) {
+        other_answers.appendChild(initialChild.cloneNode(true));
+    }
     renderPlayersArea(players);
 }
 
@@ -113,6 +128,7 @@ function renderAnswers(answers) {
     const other_answer_text = document.getElementsByClassName('other_answer_text');
     const canvasHeight = "150";
     const canvasWidth = "280";
+    console.log(maxPlayer);
     for (let index = 0; index < maxPlayer; index++) {
         for (let i = 0; i < answers.length; i++) {
             if (undefined !== players[index]) {

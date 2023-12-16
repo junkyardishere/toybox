@@ -5,14 +5,14 @@ body{
 }
 
 #contents {
-    width: 1552px;
+    width: 1752px;
     text-align: center;
     margin: 0 auto;
 }
 
 #question_area {
     height: 400px;
-    width: 1550px;
+    width: 1750px;
     background-color:#0000ff;
     border: solid 1px #000;
     display: table;
@@ -32,7 +32,7 @@ body{
 
 #other_answer_area {
     height: 0px;
-    width: 1550px;
+    width: 1750px;
     border: solid 1px #000;
 }
 

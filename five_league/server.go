@@ -127,6 +127,7 @@ func main() {
 	// // questioner
 	questioner := game.Group("/questioner")
 	questioner.POST("/question/register", createSession)
+	questioner.POST("/question/editSession", editSession)
 	questioner.POST("/question/send", sendQuestion)
 	questioner.POST("/question/judge", sendJudge)
 	questioner.POST("/resetAll", resetAll)
@@ -165,6 +166,19 @@ func createSession(c echo.Context) (err error) {
 		return err
 	}
 	session = req
+	return c.JSON(http.StatusOK, req)
+}
+
+func editSession(c echo.Context) (err error) {
+	req := new(Session)
+	if err = c.Bind(req); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	if err = c.Validate(req); err != nil {
+		return err
+	}
+	session = req
+	broadcastMessageToPlayers("editSession", req)
 	return c.JSON(http.StatusOK, req)
 }
 
