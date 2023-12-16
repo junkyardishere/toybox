@@ -3,8 +3,8 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-const port = ":5656"
-// const port = ""
+// const port = ":5656"
+const port = ""
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
 // const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
