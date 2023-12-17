@@ -6,16 +6,16 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-// const port = ":5656"
-const port = ""
 const websocketEndpoint = "/ws"
 const wsParameter = "?session="+roomKey+"&player="+playerName+"&id="+myPlayerId;
+// const port = ":5656"
+// const restApiUrl = "http://" + uri.hostname+ port;
 // const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const port = ""
+const restApiUrl = "https://" + uri.hostname+ port;
 const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
 
 // rest
-// const restApiUrl = "http://" + uri.hostname+ port;
-const restApiUrl = "https://" + uri.hostname+ port;
 const restApiEndpoint = "/game/answerer";
 const restApiUrlAnswerer = restApiUrl + restApiEndpoint;
 
@@ -83,7 +83,16 @@ socket.addEventListener("message", (event) => {
                 initMyAnswerText();
                 break;
             case "question":
-                renderQuestion(body.question);
+                switch (body.type) {
+                    case "image":
+                        renderQuestionImage(body.question);
+                        break;
+                    case "text":
+                        renderQuestion(body.question);
+                    break;
+                    default:
+                        break;
+                }
                 initAnswers();
                 initMyAnswerText();
                 enableAnswerButton();
@@ -160,7 +169,18 @@ function initPlayers(players) {
 
 function renderQuestion(question) {
     const qc = document.getElementById('question');
+    qc.innerHTML = '';
     qc.innerText = question;
+}
+
+function renderQuestionImage(img) {
+    const qc = document.getElementById('question');
+    var imageElement = document.createElement('img');
+    imageElement.src = img;
+    imageElement.width = 360;
+    imageElement.height = 180;
+    qc.innerHTML = '';
+    qc.appendChild(imageElement);
 }
 
 function initQuestion(question) {

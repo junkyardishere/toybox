@@ -3,16 +3,16 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-// const port = ":5656"
-const port = ""
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
+// const port = ":5656"
+// const restApiUrl = "http://" + uri.hostname+ port;
 // const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const port = ""
 const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const restApiUrl = "https://" + uri.hostname+ port;
 
 // rest
-// const restApiUrl = "http://" + uri.hostname+ port;
-const restApiUrl = "https://" + uri.hostname+ port;
 const restApiEndpoint = "/game/questioner";
 const restApiUrlQuestioner = restApiUrl + restApiEndpoint;
 
@@ -68,8 +68,17 @@ socket.addEventListener("message", (event) => {
                 initAnswers();
                 break;
             case "question":
-                renderQuestion(body.question);
-                initAnswers();
+                switch (body.type) {
+                    case "image":
+                        renderQuestionImage(body.question);
+                        break;
+                    case "text":
+                        renderQuestion(body.question);
+                        break;
+                    default:
+                        break;
+                }
+                initAnswers();  
                 break;
             case "judge":
                 renderAnswers(body.judges);
@@ -107,6 +116,7 @@ function sendQuestion() {
     const questionVal = question.value;
 
     const questionData = {
+        type: "text",
         question: questionVal,
     }
     var questionJson = JSON.stringify(questionData);
@@ -116,6 +126,34 @@ function sendQuestion() {
     XHR.send(questionJson);
 
     resetPlayerAnswers();
+}
+
+function sendQuestionImage() {
+    const question = document.getElementById('question_image');
+    const questionVal = question.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        console.log(e.target.result);
+        var base64String = e.target.result;
+        const questionData = {
+            type: "image",
+            question: base64String,
+        }
+        var questionJson = JSON.stringify(questionData);
+        const XHR = new XMLHttpRequest();
+        XHR.open('POST', restApiUrlQuestioner + "/question/send");
+        XHR.setRequestHeader('Content-Type', 'application/json');
+        XHR.send(questionJson);
+        resetPlayerAnswers();
+    };
+    reader.readAsDataURL(questionVal);
+}
+
+function resetQuestion() {
+    const q_text = document.getElementById('question');
+    const q_image = document.getElementById('question_image');
+    q_text.innerText = "";
+    q_image.value = "";
 }
 
 function sendJudge() {
@@ -161,7 +199,18 @@ function initPlayers(players) {
 
 function renderQuestion(question) {
     const qc = document.getElementById('question');
+    qc.innerHTML = '';
     qc.innerText = question;
+}
+
+function renderQuestionImage(img) {
+    const qc = document.getElementById('question');
+    var imageElement = document.createElement('img');
+    imageElement.src = img;
+    imageElement.width = 300;
+    imageElement.height = 100;
+    qc.innerHTML = '';
+    qc.appendChild(imageElement);
 }
 
 function initQuestion(question) {

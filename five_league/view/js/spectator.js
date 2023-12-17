@@ -3,11 +3,11 @@ const roomKey = getParam("room")??"";
 
 // websocket
 const uri = new URL(window.location.href);
-// const port = ":5656"
-const port = ""
 const websocketEndpoint = "/ws/spectate"
 const wsParameter = "?session="+roomKey;
+// const port = ":5656"
 // const socket = new WebSocket('ws://' + uri.hostname + port + websocketEndpoint + wsParameter);
+const port = ""
 const socket = new WebSocket('wss://' + uri.hostname + port + websocketEndpoint + wsParameter);
 
 // global variables
@@ -60,10 +60,18 @@ socket.addEventListener("message", (event) => {
                 initQuestion(question);
                 break;
             case "question":
-                renderQuestion(body.question);
+                console.log(body);
+                switch (body.type) {
+                    case "image":
+                        renderQuestionImage(body.question);
+                        break;
+                    case "text":
+                        renderQuestion(body.question);
+                    break;                
+                    default:
+                        break;
+                }
                 initAnswers();
-                initMyAnswerText();
-                enableAnswerButton();
                 break;
             case "judge":
                 renderAnswers(body.judges);
@@ -117,7 +125,18 @@ function initPlayers(players) {
 
 function renderQuestion(question) {
     const qc = document.getElementById('question');
+    qc.innerHTML = '';
     qc.innerText = question;
+}
+
+function renderQuestionImage(img) {
+    const qc = document.getElementById('question');
+    var imageElement = document.createElement('img');
+    imageElement.src = img;
+    imageElement.width = 760;
+    imageElement.height = 380;
+    qc.innerHTML = '';
+    qc.appendChild(imageElement);
 }
 
 function initQuestion(question) {

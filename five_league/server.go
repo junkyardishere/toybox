@@ -53,6 +53,7 @@ type Player struct {
 }
 
 type Question struct {
+	Type     string `json:"type" validate:"required"`
 	Question string `json:"question" validate:"required"`
 }
 
