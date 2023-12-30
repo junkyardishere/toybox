@@ -71,7 +71,7 @@ function setButtonEnabled() {
 
 function getRandomInt(max) {
     while (true) {
-        let n = Math.floor(Math.random() * max);
+        let n = Math.floor(Math.random() * (max + 1));
         console.log(n);
         if (n != 0) {
             return n;
