@@ -1,0 +1,11 @@
+body {
+    color: white;
+    font-size: xx-large;
+    text-shadow: 1px 1px 10px rgb(245, 0, 0), -1px 1px 10px rgb(245, 0, 0), 1px -1px 10px rgb(245, 0, 0), -1px -1px 10px rgb(245, 0, 0);
+    font-family: 'Casteller';
+}
+.contents {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+}
