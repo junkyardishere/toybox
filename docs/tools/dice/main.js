@@ -2,7 +2,6 @@ const max = parseInt(getParam("max")??"6");
 const dice = document.getElementById("dice");
 const diceImg = document.getElementById("diceImg");
 const rollButton = document.getElementById("rollButton");
-console.log(rollButton);
 
 const execFrequency = 49;
 const timerSeconds = 3 * 1000;
