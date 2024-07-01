@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video to ASCII Art</title>
+    <style>
+        pre {
+            font-family: monospace;
+            font-size: 0.3rem;
+            white-space: pre;
+            line-height: 1;
+        }
+        #video {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <video id="video" width="320" height="240" autoplay muted loop>
+        <source src="video/azobday_2024.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
+    <pre id="ascii"></pre>
+    <script src="js/movie.js"></script>
+</body>
+</html>

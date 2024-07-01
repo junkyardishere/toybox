@@ -15,7 +15,7 @@ var headBDaySec = document.getElementById("cd_bday_sec");
 
 var bDayMsg = document.getElementById("birthday_message");
 var bDayNets = document.getElementById("netsurugi_dono_rainbow");
-var bDayAA = document.getElementById("ascii");
+var bDayAA = document.getElementById("netsurugi_dono_rainbow_aa");
 
  function countToBirthday(bMonth, bDay, element_id) {
     let now = new Date();
@@ -41,9 +41,9 @@ var bDayAA = document.getElementById("ascii");
         return;
     }
 
-    // console.log(now.getTime());
-    // console.log(bDayStart);
-    // console.log(bDayEnd);
+    console.log(now.getTime());
+    console.log(bDayStart);
+    console.log(bDayEnd);
     headBDayDay.innerHTML = bDayResult.day;
     headBDayHour.innerHTML = bDayResult.hour;
     headBDayMin.innerHTML = bDayResult.min;
