@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
 
     // 視覚的密度に基づくアスキーキャラクターセット（70文字）
-    const asciiCharacters = ' .`^",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*MW&8%B@$#';
+    let asciiCharacters = ' .`^",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*MW&8%B@$#';
+    //  asciiCharacters = ' .,;:!~+*=|-^/\_ilIrcovksxnjftYJFTLbhdpqBOKQRSXZCMHUVWNA%8&#@';
+    //  asciiCharacters = ' ▎▌▊█';
 
     video.addEventListener('play', () => {
         const width = canvas.width;
